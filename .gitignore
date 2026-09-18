@@ -1,0 +1,52 @@
+# Private material and credentials.
+/interview/
+.env
+.env.*
+!.env.example
+/data/runtime_config/
+/data/feishu/
+/data/feishu_ws_worker.lock
+
+# Runtime projects, databases, backups, and evaluation output.
+/projects/
+/runtime/
+/backup/
+/eval/runs/
+/data/material_library/*
+!/data/material_library/README.md
+
+# Machine-local agent settings.
+/.claude/settings.local.json
+/.claude/scheduled_tasks.lock
+
+# Python dependencies and caches.
+/.venv*/
+**/__pycache__/
+*.py[cod]
+/.pytest_cache/
+/build/
+/dist/
+/*.egg-info/
+
+# Frontend dependencies and build output.
+/frontend/node_modules/
+/frontend/dist/
+
+# Runtime files.
+*.log
+*.sqlite
+*.sqlite3
+*.sqlite-shm
+*.sqlite-wal
+
+# Generated sandbox data.
+/sandbox/**/output/
+/sandbox/MediaCrawler/browser_data/
+/sandbox/MediaCrawler/data/
+
+# Generated root images.
+/day*.png
+/整体*.png
+
+# macOS metadata.
+.DS_Store

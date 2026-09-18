@@ -1,0 +1,21 @@
+{
+  "scenario_id": "emeishan_3d",
+  "destination_type": "自然登山/朝圣",
+  "notes": "素材库基本空白（docs/ARCHITECTURE.md决策1），冷启动表现本身是观测对象；决策5特别提示这类素材空白目的地judge的web_search核实更重要",
+  "requirements": {
+    "destination": "峨眉山",
+    "days": 3,
+    "style": "登山朝圣，想体验金顶日出和云海，同时轻度徒步不想太累",
+    "budget": "中等，人均每天400-600元（含索道门票）",
+    "notes": "有老人同行，膝盖不太好，尽量少长时间爬台阶；对寺庙素斋感兴趣",
+    "origin": "成都",
+    "transport": "高铁"
+  },
+  "companion_interactions": [
+    {"id": "guide_recall", "query": "第二天主要安排了哪些地方？", "expected_agent": "guide_agent", "notes": "回顾行程，检验guide_agent是否忠实复述route_plan"},
+    {"id": "realtime_hours", "query": "金顶索道今天几点开始运行？", "expected_agent": "realtime_agent", "notes": "索道运营时间需实时/近期信息，检验realtime_agent是否真联网而非编造"},
+    {"id": "lifestyle_supplement", "query": "山上有素斋餐厅推荐吗？", "expected_agent": "lifestyle_agent", "notes": "峨眉山寺庙素斋是有代表性的补充咨询场景"},
+    {"id": "pitfall_check", "query": "峨眉山有没有什么要避开的坑？", "expected_agent": "pitfall_agent", "notes": "猴区是峨眉山公认的高风险点，检验pitfall_agent能否给出真实依据的提醒而非泛泛而谈"},
+    {"id": "culture_query", "query": "报国寺这个名字是怎么来的？", "expected_agent": "culture_agent", "entry_target": "culture_agent_node", "via": "edit", "notes": "对齐chengdu_3d的culture_agent edit入口测试方式"}
+  ]
+}

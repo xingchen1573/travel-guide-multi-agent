@@ -1,0 +1,7 @@
+interface:
+  display_name: "长任务持续监督"
+  short_description: "基于可观察证据约束长任务等待、异常介入、隔离复现与断点恢复"
+  default_prompt: "使用 $long-running-task-supervisor 监督这项长运行任务，基于可观察进展决定等待、异常介入和断点恢复。"
+
+policy:
+  allow_implicit_invocation: false

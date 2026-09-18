@@ -1,0 +1,21 @@
+{
+  "scenario_id": "haikou_3d",
+  "destination_type": "海滨度假",
+  "notes": "素材库基本空白，冷启动表现本身是观测对象；海滨度假是第四种旅行形态，与城市人文/登山/自驾形成完整对比",
+  "requirements": {
+    "destination": "海口",
+    "days": 3,
+    "style": "海滨度假，轻松悠闲，想体验当地人生活节奏",
+    "budget": "中等，人均每天300-500元",
+    "notes": "带小孩（5岁），不想去太商业化的景点；对海鲜感兴趣但小孩海鲜过敏需要分开安排餐食",
+    "origin": "上海",
+    "transport": "飞机"
+  },
+  "companion_interactions": [
+    {"id": "guide_recall", "query": "第二天安排了哪些地方？", "expected_agent": "guide_agent", "notes": "回顾行程"},
+    {"id": "realtime_hours", "query": "海南省博物馆今天几点开门？", "expected_agent": "realtime_agent", "notes": "博物馆开放时间需实时信息"},
+    {"id": "lifestyle_supplement", "query": "海口有什么适合带小孩去吃的本地小吃店？", "expected_agent": "lifestyle_agent", "notes": "亲子餐饮场景，注意小孩海鲜过敏的饮食限制"},
+    {"id": "pitfall_check", "query": "海口旅游有什么要避开的坑？", "expected_agent": "pitfall_agent", "notes": "海滨城市旅游的常见陷阱（海鲜宰客/出租车推荐等）"},
+    {"id": "culture_query", "query": "骑楼老街的建筑风格是受哪些文化影响形成的？", "expected_agent": "culture_agent", "entry_target": "culture_agent_node", "via": "edit", "notes": "覆盖海口骑楼这一标志性建筑遗存的文化问题"}
+  ]
+}

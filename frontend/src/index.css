@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+/* 管理后台设计token：暖色点缀+SaaS结构，浅色为主。
+   跟design/admin_console/admin.css当时确定的色板保持同一套语义，
+   这里用Tailwind v4的@theme把它们注册成color-*工具类（bg-brand、text-ink-2等）。 */
+@theme {
+  --color-bg: #faf7f2;
+  --color-bg-inset: #f3efe7;
+  --color-surface: #ffffff;
+  --color-surface-hover: #fdfbf8;
+
+  --color-border: #eae3d6;
+  --color-border-strong: #ddd3bf;
+
+  --color-ink: #262019;
+  --color-ink-2: #6b6055;
+  --color-ink-3: #9c9284;
+
+  --color-brand: #d97757;
+  --color-brand-dark: #b85c3f;
+  --color-brand-soft: #fbe9e0;
+
+  --color-gold: #c8963e;
+  --color-gold-soft: #f7ecd6;
+  --color-teal: #3f8a82;
+  --color-teal-soft: #e1f0ed;
+
+  --color-ok: #3f8a5c;
+  --color-ok-soft: #e5f3e9;
+  --color-warn: #c8963e;
+  --color-warn-soft: #f7ecd6;
+  --color-danger: #c0503f;
+  --color-danger-soft: #f9e6e1;
+  --color-pending: #8a8578;
+  --color-pending-soft: #eeebe3;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+.feedback-flow-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 1.2fr) minmax(0, 1fr);
+}
+
+.feedback-kernel {
+  position: relative;
+  border-inline: 1px solid var(--color-border);
+  background: color-mix(in srgb, var(--color-teal-soft) 36%, var(--color-surface));
+}
+
+.feedback-kernel::before,
+.feedback-kernel::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 22px;
+  height: 1px;
+  background: var(--color-border-strong);
+}
+
+.feedback-kernel::before { left: -22px; }
+.feedback-kernel::after { right: -22px; }
+
+@media (max-width: 699px) {
+  .feedback-flow-grid { grid-template-columns: 1fr; }
+  .feedback-kernel { border-inline: 0; border-block: 1px solid var(--color-border); }
+  .feedback-kernel::before,
+  .feedback-kernel::after { display: none; }
+}
+
+/* Stop wheel/touch scroll chaining at nested panel boundaries. Keep the axes
+   separate so a horizontal tab/table can still allow normal page scrolling. */
+.scroll-boundary-y {
+  overscroll-behavior-y: contain;
+}
+
+.scroll-boundary-x {
+  overscroll-behavior-x: contain;
+}
+
+/* Drawers and dialogs own the viewport while open; the background page must
+   not move when the pointer is over an edge, backdrop, or exhausted scroller. */
+body:has([aria-modal="true"]) {
+  overflow: hidden;
+}
+
+/* Keep review queue rows content-sized under browser zoom and text scaling.
+   The wrapper also isolates native button sizing from the scroll container. */
+.review-queue-list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.review-queue-row {
+  flex: 0 0 auto;
+  min-height: 0;
+}
+
+.review-queue-item {
+  display: block;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  vertical-align: top;
+}
+
+/* react-markdown渲染final_guide.md用的最小样式层，不引入@tailwindcss/typography，
+   跟项目现有"手写Tailwind工具类"风格保持一致，复用index.css已有的design token变量。 */
+.markdown-body {
+  line-height: 1.85;
+}
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3 {
+  font-weight: 700;
+  color: var(--color-ink);
+  margin: 1.2em 0 0.5em;
+}
+.markdown-body h1 {
+  font-size: 1.4em;
+}
+.markdown-body h2 {
+  font-size: 1.2em;
+}
+.markdown-body h3 {
+  font-size: 1.05em;
+}
+.markdown-body p {
+  margin: 0.6em 0;
+}
+.markdown-body strong {
+  font-weight: 700;
+}
+.markdown-body blockquote {
+  border-left: 3px solid var(--color-border-strong);
+  color: var(--color-ink-2);
+  padding: 0.2em 1em;
+  margin: 0.8em 0;
+  background: var(--color-bg-inset);
+  border-radius: 0.375rem;
+}
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 1.4em;
+  margin: 0.5em 0;
+}
+.markdown-body li {
+  margin: 0.25em 0;
+}
+.markdown-body hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin: 1.5em 0;
+}
+.markdown-body code {
+  font-family: var(--font-mono);
+  background: var(--color-bg-inset);
+  padding: 0.1em 0.35em;
+  border-radius: 0.25rem;
+  font-size: 0.9em;
+}
+.markdown-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0.8em 0;
+  font-size: 0.95em;
+}
+.markdown-body th,
+.markdown-body td {
+  border: 1px solid var(--color-border);
+  padding: 0.4em 0.7em;
+  text-align: left;
+}
+.markdown-body th {
+  background: var(--color-bg-inset);
+  font-weight: 700;
+}

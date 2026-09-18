@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="攻略中枢">
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#d97757"/>
+  <path d="M15 45c7-13 13 6 22-8" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="15" cy="45" r="4" fill="#f7ecd6"/>
+  <path d="M48 14c-7.2 0-13 5.8-13 13 0 9.4 13 21 13 21s13-11.6 13-21c0-7.2-5.8-13-13-13Z" fill="#fff" transform="translate(-4 -2) scale(.86)"/>
+  <circle cx="37.3" cy="21.2" r="4.3" fill="#3f8a82"/>
+</svg>

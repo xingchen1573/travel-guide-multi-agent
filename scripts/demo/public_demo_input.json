@@ -1,0 +1,305 @@
+{
+  "schema_version": "public-deterministic-demo-v1",
+  "project_id": "public-deterministic-demo",
+  "fixed_now": "2026-09-17T00:00:00+00:00",
+  "requirements": {
+    "topic": "海岚市两日慢游",
+    "requirements": {
+      "destination": "海岚市",
+      "days": 2,
+      "pace": "轻松步行",
+      "preferences": [
+        "旧城空间",
+        "滨水散步",
+        "在地小店"
+      ],
+      "demo_notice": "海岚市及本文件内全部地点均为合成内容，仅用于验证工程链路。"
+    }
+  },
+  "route_plan": {
+    "version": 2,
+    "amap_verified": false,
+    "days": [
+      {
+        "day": 1,
+        "city": "海岚市",
+        "area": "旧港片区",
+        "pois": [
+          {
+            "name": "灯塔步道",
+            "brief": "沿旧港慢行的合成示例点位",
+            "needs_detail": true,
+            "needs_detail_reason": "用于演示重点景点内部路线分支"
+          },
+          {
+            "name": "旧港市集",
+            "brief": "午后休息与用餐的合成示例点位"
+          }
+        ],
+        "notes": "上午沿灯塔步道慢行，午后在旧港市集休息。",
+        "claims": [
+          {
+            "claim_id": "demo-route-day-1",
+            "target_path": "notes",
+            "subject": "Day 1 路线",
+            "claim_text": "第一天按灯塔步道到旧港市集的顺序游览。",
+            "claim_type": "schedule",
+            "support_mode": "user_constraint",
+            "claimed_entities": [
+              "灯塔步道",
+              "旧港市集"
+            ]
+          }
+        ]
+      },
+      {
+        "day": 2,
+        "city": "海岚市",
+        "area": "河畔片区",
+        "pois": [
+          {
+            "name": "山岚公园",
+            "brief": "上午散步的合成示例点位"
+          },
+          {
+            "name": "河畔书屋",
+            "brief": "下午收尾的合成示例点位"
+          }
+        ],
+        "notes": "上午游览山岚公园，下午到河畔书屋结束行程。",
+        "claims": [
+          {
+            "claim_id": "demo-route-day-2",
+            "target_path": "notes",
+            "subject": "Day 2 路线",
+            "claim_text": "第二天按山岚公园到河畔书屋的顺序游览。",
+            "claim_type": "schedule",
+            "support_mode": "user_constraint",
+            "claimed_entities": [
+              "山岚公园",
+              "河畔书屋"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "lifestyle_items": [
+    {
+      "field": "food",
+      "day": 1,
+      "recommendation": "午餐放在旧港片区，并预留一小时机动时间。",
+      "claims": [
+        {
+          "claim_id": "demo-lifestyle-food-1",
+          "target_path": "recommendation",
+          "subject": "Day 1 用餐安排",
+          "claim_text": "第一天午餐安排在旧港片区。",
+          "claim_type": "schedule",
+          "support_mode": "user_constraint"
+        }
+      ]
+    },
+    {
+      "field": "outfit",
+      "day": 1,
+      "recommendation": "以轻便步行鞋和可增减的外层为主。",
+      "claims": [
+        {
+          "claim_id": "demo-lifestyle-outfit-1",
+          "target_path": "recommendation",
+          "subject": "步行装备",
+          "claim_text": "本次演示行程采用轻松步行节奏。",
+          "claim_type": "preference",
+          "support_mode": "user_constraint"
+        }
+      ]
+    },
+    {
+      "field": "lodging",
+      "day": 1,
+      "recommendation": "住宿位置优先选择两个片区之间交通方便的区域。",
+      "claims": [
+        {
+          "claim_id": "demo-lifestyle-lodging-1",
+          "target_path": "recommendation",
+          "subject": "住宿选址",
+          "claim_text": "住宿需要兼顾旧港片区与河畔片区。",
+          "claim_type": "preference",
+          "support_mode": "user_constraint"
+        }
+      ]
+    },
+    {
+      "field": "play",
+      "day": 2,
+      "recommendation": "第二天下午保留弹性，不额外塞入跨区点位。",
+      "claims": [
+        {
+          "claim_id": "demo-lifestyle-play-2",
+          "target_path": "recommendation",
+          "subject": "Day 2 节奏",
+          "claim_text": "第二天下午按轻松节奏收尾。",
+          "claim_type": "schedule",
+          "support_mode": "user_constraint"
+        }
+      ]
+    }
+  ],
+  "pitfall_items": [
+    {
+      "field": "food",
+      "day": 1,
+      "target_recommendation": "午餐放在旧港片区，并预留一小时机动时间。",
+      "warning": ""
+    },
+    {
+      "field": "outfit",
+      "day": 1,
+      "target_recommendation": "以轻便步行鞋和可增减的外层为主。",
+      "warning": ""
+    },
+    {
+      "field": "lodging",
+      "day": 1,
+      "target_recommendation": "住宿位置优先选择两个片区之间交通方便的区域。",
+      "warning": ""
+    },
+    {
+      "field": "play",
+      "day": 2,
+      "target_recommendation": "第二天下午保留弹性，不额外塞入跨区点位。",
+      "warning": ""
+    }
+  ],
+  "poi_details": [
+    {
+      "poi_name": "灯塔步道",
+      "day": 1,
+      "needs_detail_reason": "用于演示重点景点内部路线分支",
+      "routes": [
+        {
+          "route_name": "旧港慢行线",
+          "suitable_for": "希望控制步行强度的游客",
+          "recommended": true,
+          "recommend_reason": "与两日慢游的固定输入一致",
+          "route_segments": [
+            {
+              "order": 1,
+              "point_name": "入口广场",
+              "highlight": "确认随身物品后开始慢行。",
+              "suggested_duration": "10分钟",
+              "claims": [
+                {
+                  "claim_id": "demo-poi-lighthouse-1",
+                  "target_path": "highlight",
+                  "subject": "入口广场",
+                  "claim_text": "从入口广场开始灯塔步道内部路线。",
+                  "claim_type": "route_order",
+                  "support_mode": "user_constraint"
+                }
+              ]
+            },
+            {
+              "order": 2,
+              "point_name": "观潮平台",
+              "highlight": "作为中段停留点，避免连续赶路。",
+              "suggested_duration": "25分钟",
+              "claims": [
+                {
+                  "claim_id": "demo-poi-lighthouse-2",
+                  "target_path": "highlight",
+                  "subject": "观潮平台",
+                  "claim_text": "观潮平台是本演示路线的中段停留点。",
+                  "claim_type": "route_order",
+                  "support_mode": "user_constraint"
+                }
+              ]
+            },
+            {
+              "order": 3,
+              "point_name": "旧港出口",
+              "highlight": "从这里衔接旧港市集。",
+              "suggested_duration": "15分钟",
+              "claims": [
+                {
+                  "claim_id": "demo-poi-lighthouse-3",
+                  "target_path": "highlight",
+                  "subject": "旧港出口",
+                  "claim_text": "灯塔步道从旧港出口衔接旧港市集。",
+                  "claim_type": "route_order",
+                  "support_mode": "user_constraint"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "final_guide": {
+    "meta": {
+      "merged_fields": [
+        "route_plan",
+        "lifestyle.food",
+        "lifestyle.outfit",
+        "lifestyle.lodging",
+        "lifestyle.play"
+      ],
+      "unresolved_conflicts": [],
+      "checklist_included": true,
+      "references": [],
+      "warnings": []
+    },
+    "blocks": [
+      {
+        "section": "标题",
+        "markdown": "# 海岚市两日慢游",
+        "mapping_mode": "editorial",
+        "mapping_note": "根据固定演示输入生成标题"
+      },
+      {
+        "section": "演示说明",
+        "markdown": "> 海岚市、灯塔步道等均为合成内容。本攻略只用于展示固定输入如何经过结构化 Workspace、Claim 映射和交付契约形成 Markdown 与静态网站，不用于提供真实旅行建议。",
+        "mapping_mode": "editorial",
+        "mapping_note": "公开演示边界说明"
+      },
+      {
+        "section": "Day 1",
+        "markdown": "## Day 1｜旧港慢行\n\n上午从灯塔步道开始，沿内部慢行线依次经过入口广场、观潮平台和旧港出口；午后衔接旧港市集。全日重点是保留停留时间，不把同一天扩张成跨区打卡清单。",
+        "mapping_mode": "upstream",
+        "upstream_claim_ids": [
+          "demo-route-day-1",
+          "demo-poi-lighthouse-1",
+          "demo-poi-lighthouse-2",
+          "demo-poi-lighthouse-3"
+        ]
+      },
+      {
+        "section": "Day 2",
+        "markdown": "## Day 2｜河畔收尾\n\n上午前往山岚公园，下午在河畔书屋结束行程。第二天不增加新的跨区点位，给步行、休息和临时调整留出空间。",
+        "mapping_mode": "upstream",
+        "upstream_claim_ids": [
+          "demo-route-day-2"
+        ]
+      },
+      {
+        "section": "衣食住行",
+        "markdown": "## 衣食住行\n\n午餐安排在旧港片区并预留机动时间；穿着以轻便步行鞋和可增减外层为主；住宿选址兼顾旧港与河畔两个片区；第二天下午保持弹性。",
+        "mapping_mode": "upstream",
+        "upstream_claim_ids": [
+          "demo-lifestyle-food-1",
+          "demo-lifestyle-outfit-1",
+          "demo-lifestyle-lodging-1",
+          "demo-lifestyle-play-2"
+        ]
+      },
+      {
+        "section": "行前清单",
+        "markdown": "## 行前清单\n\n- 轻便步行鞋与可增减外层\n- 饮水、充电设备和个人常用物品\n- 为临时调整保留一段机动时间\n- 真实出行前重新核对目的地、开放状态与交通条件",
+        "mapping_mode": "editorial",
+        "mapping_note": "根据合成行程结构整理的通用清单"
+      }
+    ]
+  }
+}

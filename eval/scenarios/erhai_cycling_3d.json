@@ -1,0 +1,19 @@
+{
+  "scenario_id": "erhai_cycling_3d",
+  "destination_type": "主题骑行/自然风光",
+  "notes": "素材库基本空白，冷启动表现本身是观测对象；主题骑行是第五种旅行形态，需要检验agent对'骑行'这种活动导向需求的适配能力",
+  "requirements": {
+    "destination": "洱海骑行",
+    "days": 3,
+    "style": "环洱海骑行，想体验田园风光和白族文化，节奏不要太快",
+    "budget": "经济型，人均每天200-400元（含租自行车费用）",
+    "notes": "有骑行经验但不是专业选手，一天骑50-60公里比较合适；想住几晚特色民宿，喜欢拍照"
+  },
+  "companion_interactions": [
+    {"id": "guide_recall", "query": "第一天骑行路线怎么安排？", "expected_agent": "guide_agent", "notes": "回顾骑行路线安排"},
+    {"id": "realtime_hours", "query": "明天大理的天气适合骑行吗？", "expected_agent": "realtime_agent", "notes": "天气查询需实时信息，骑行活动对天气敏感度极高"},
+    {"id": "lifestyle_supplement", "query": "洱海沿线有什么性价比高的民宿推荐？", "expected_agent": "lifestyle_agent", "notes": "骑行途中的住宿推荐（不同于城市/景区住宿）"},
+    {"id": "pitfall_check", "query": "洱海骑行有什么要注意的坑？", "expected_agent": "pitfall_agent", "notes": "骑行安全/租车陷阱/防晒等是骑行特有的风险点"},
+    {"id": "culture_query", "query": "白族的三道茶是什么？有什么讲究？", "expected_agent": "culture_agent", "entry_target": "culture_agent_node", "via": "edit", "notes": "覆盖白族文化的深度问题"}
+  ]
+}

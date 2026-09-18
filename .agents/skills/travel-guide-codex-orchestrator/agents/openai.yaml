@@ -1,0 +1,7 @@
+interface:
+  display_name: "Codex旅游攻略编排"
+  short_description: "通过可配置旅游运行时生成自主路线或固定路线攻略，并保留Workspace与质量门禁"
+  default_prompt: "Use $travel-guide-codex-orchestrator with the configured travel runtime to generate and validate an autonomous route-only draft from saved requirements, stopping before route confirmation."
+
+policy:
+  allow_implicit_invocation: true

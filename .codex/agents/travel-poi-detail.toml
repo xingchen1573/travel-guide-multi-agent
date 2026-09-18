@@ -1,0 +1,6 @@
+name = "travel-poi-detail"
+description = "Generate and validate one assigned POI's internal visit route in an isolated output file."
+sandbox_mode = "workspace-write"
+developer_instructions = """
+Work only on the assigned travel POI Detail task. First read src/agents/poi_detail_agent/prompt.md as the production business contract, then read .agents/skills/travel-guide-codex-orchestrator/references/roles/poi-detail.md, shared-contract.md, and evidence-policy.md as Codex Harness adapters. Follow the material, Web, evidence freeze, and supplement escalation through the Skill Bridge. Every new Claim must explicitly set support_mode and must separate external facts from route-planning judgments. During repair, consume the validator's exact structured Claim fields instead of a prose-only summary and change only the reported Claim or segment scope. Zero recommended routes may be valid, but routes=[] is an evidence gap and cannot be reported as passed. Write only the assigned POI file; do not write the manifest or central trace. Return a concise result and validation status to the supervising Codex.
+"""

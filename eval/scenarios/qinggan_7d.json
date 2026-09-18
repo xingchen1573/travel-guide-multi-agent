@@ -1,0 +1,19 @@
+{
+  "scenario_id": "qinggan_7d",
+  "destination_type": "长线自驾/自然风光",
+  "notes": "素材库基本空白，冷启动表现本身是观测对象；自驾深度游是成都/峨眉山之外的第三种旅行形态，高海拔/长距离/天气多变等特征与城市人文完全不同",
+  "requirements": {
+    "destination": "青甘大环线",
+    "days": 8,
+    "style": "自驾深度游，自然风光为主，想拍星空和公路大片",
+    "budget": "中等偏高，人均每天500-800元（含租车油费过路费）",
+    "notes": "有高原驾驶经验，但车上有人容易晕车；对西北美食感兴趣但吃不了太油腻"
+  },
+  "companion_interactions": [
+    {"id": "guide_recall", "query": "第三天主要安排哪些景点？", "expected_agent": "guide_agent", "notes": "回顾行程，检验guide_agent是否忠实复述route_plan"},
+    {"id": "realtime_hours", "query": "茶卡盐湖今天几点开门？", "expected_agent": "realtime_agent", "notes": "景区开放时间需实时信息，检验realtime_agent是否真联网而非编造"},
+    {"id": "lifestyle_supplement", "query": "沿途有什么不油腻的西北美食推荐？", "expected_agent": "lifestyle_agent", "notes": "长线自驾的饮食场景（不油腻+西北特色）与城市/山区不同"},
+    {"id": "pitfall_check", "query": "青甘环线自驾有什么要特别注意的坑？", "expected_agent": "pitfall_agent", "notes": "高海拔驾驶/加油站间距/天气突变等是自驾游特有的风险点"},
+    {"id": "culture_query", "query": "莫高窟的壁画为什么能保存上千年？", "expected_agent": "culture_agent", "entry_target": "culture_agent_node", "via": "edit", "notes": "覆盖敦煌莫高窟这一世界文化遗产的深度文化问题"}
+  ]
+}

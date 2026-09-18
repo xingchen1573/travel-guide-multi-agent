@@ -1,0 +1,369 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1700" viewBox="0 0 2200 1700" role="img" aria-labelledby="diagram-title diagram-desc">
+  <title id="diagram-title">旅游攻略多 Agent 编排与共享 Workspace 架构</title>
+  <desc id="diagram-desc">用户通过飞书或命令行进入 Main Agent 控制面，由确定性状态机与轻量模型按需调度 Material、Route、Lifestyle、Pitfall、Integration 和 POI Detail 专职 Agent。子 Agent 不直接互调，通过受限工具读写共享 Workspace；引用、地图、可执行性、交付契约和 Manifest Join 是程序门禁而非 Agent。项目完成后进入五选一陪伴角色池，定向复核 Agent 和 Codex Skill 分别位于生成主图之外。</desc>
+
+  <defs>
+    <marker id="arrow-purple" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#7657C8"/>
+    </marker>
+    <marker id="arrow-teal" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#0F8A79"/>
+    </marker>
+    <marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#2563EB"/>
+    </marker>
+    <marker id="arrow-gray" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#667085"/>
+    </marker>
+    <marker id="arrow-rose" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse" markerUnits="strokeWidth">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#BE185D"/>
+    </marker>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; fill: #172033; letter-spacing: 0; }
+      .title { font-size: 38px; font-weight: 750; }
+      .subtitle { font-size: 16px; fill: #667085; }
+      .eyebrow { font-size: 13px; font-weight: 700; fill: #475467; }
+      .section-title { font-size: 21px; font-weight: 750; }
+      .section-sub { font-size: 13px; fill: #667085; }
+      .box-title { font-size: 17px; font-weight: 700; }
+      .box-sub { font-size: 13px; fill: #667085; }
+      .tiny { font-size: 11.5px; fill: #667085; }
+      .micro { font-size: 10.5px; fill: #667085; }
+      .kicker { font-size: 11px; font-weight: 750; }
+      .panel { stroke-width: 1.3; }
+      .box { stroke-width: 1.3; }
+      .dispatch { fill: none; stroke: #667085; stroke-width: 1.8; marker-end: url(#arrow-gray); }
+      .dispatch-bus { fill: none; stroke: #667085; stroke-width: 1.8; }
+      .flow { fill: none; stroke: #667085; stroke-width: 1.7; marker-end: url(#arrow-gray); }
+      .data-link { fill: none; stroke: #2563EB; stroke-width: 1.8; marker-end: url(#arrow-blue); }
+      .data-readwrite { fill: none; stroke: #2563EB; stroke-width: 1.8; marker-start: url(#arrow-blue); marker-end: url(#arrow-blue); }
+      .feedback { fill: none; stroke: #BE185D; stroke-width: 1.7; stroke-dasharray: 7 6; marker-end: url(#arrow-rose); }
+    </style>
+  </defs>
+
+  <rect width="2200" height="1700" fill="#F7F8FA"/>
+
+  <g id="header">
+    <text x="60" y="52" class="title">旅游攻略多 Agent 编排与共享 Workspace</text>
+    <text x="60" y="82" class="subtitle">调度控制面 · 专职 Agent 执行面 · 程序门禁 · 结构化事实数据面 · 陪伴与复核旁路</text>
+    <text x="2140" y="48" text-anchor="end" class="eyebrow">MULTI-AGENT ORCHESTRATION</text>
+    <text x="2140" y="74" text-anchor="end" class="tiny">当前实现角色与调度边界 · 2026-09-15</text>
+  </g>
+
+  <g id="control-plane">
+    <rect x="60" y="110" width="2080" height="180" rx="8" fill="#EAF8F3" stroke="#9BD8CB" class="panel"/>
+    <rect x="60" y="110" width="8" height="180" fill="#0F8A79"/>
+    <text x="86" y="142" class="section-title" fill="#0F766E">接入与调度控制面</text>
+    <text x="86" y="163" class="section-sub">主 Agent 维护状态与依赖；模型只在需求抽取、意图分类等必要节点介入</text>
+
+    <rect x="95" y="178" width="260" height="82" rx="8" fill="#FFFFFF" stroke="#58B7A3" class="box"/>
+    <text x="225" y="205" text-anchor="middle" class="box-title">飞书 / CLI / 管理后台</text>
+    <text x="225" y="228" text-anchor="middle" class="box-sub">创建 Project · 输入需求</text>
+    <text x="225" y="248" text-anchor="middle" class="tiny">编排 / API 可指定角色；飞书默认路由</text>
+
+    <rect x="395" y="154" width="1040" height="116" rx="8" fill="#FFFFFF" stroke="#40A994" class="box"/>
+    <rect x="395" y="154" width="8" height="116" rx="4" fill="#0F8A79"/>
+    <text x="915" y="184" text-anchor="middle" class="box-title" fill="#0F766E">Main Agent / Supervisor</text>
+    <text x="915" y="207" text-anchor="middle" font-size="13" fill="#667085">唯一对话入口 · 确定性状态机与依赖表 · 任务派发、恢复与完成判定</text>
+    <rect x="455" y="222" width="265" height="30" rx="6" fill="#F1FAF7" stroke="#B9E2D7"/>
+    <text x="587" y="242" text-anchor="middle" font-size="11.5" fill="#0F766E">子 Agent 不彼此直接调用</text>
+    <rect x="755" y="222" width="320" height="30" rx="6" fill="#F1FAF7" stroke="#B9E2D7"/>
+    <text x="915" y="242" text-anchor="middle" font-size="11.5" fill="#0F766E">本身不撰写攻略正文</text>
+    <rect x="1110" y="222" width="265" height="30" rx="6" fill="#F1FAF7" stroke="#B9E2D7"/>
+    <text x="1242" y="242" text-anchor="middle" font-size="11.5" fill="#0F766E">通过 Workspace 状态推进</text>
+
+    <rect x="1480" y="154" width="610" height="116" rx="8" fill="#ECF8EF" stroke="#65B883" class="box"/>
+    <text x="1785" y="184" text-anchor="middle" class="box-title" fill="#117044">HITL · 人工决策点</text>
+    <text x="1785" y="208" text-anchor="middle" class="box-sub">路线骨架确认 · 结构变更确认 · 实时 Patch 审批</text>
+    <text x="1785" y="230" text-anchor="middle" class="box-sub">有限返修耗尽时保留 Finding，供人工定向复核</text>
+    <text x="1785" y="250" text-anchor="middle" class="tiny">人工确认方向，不等于事实、时效和可执行性已通过</text>
+
+    <path d="M355 219 H387" class="flow"/>
+    <path d="M1435 212 H1472" class="flow"/>
+    <path d="M1480 238 H1443" fill="none" stroke="#168A52" stroke-width="1.7" marker-end="url(#arrow-teal)"/>
+  </g>
+
+  <g id="agent-execution-plane">
+    <rect x="60" y="320" width="2080" height="505" rx="8" fill="#FFF0ED" stroke="#F0B7AC" class="panel"/>
+    <rect x="60" y="320" width="8" height="505" fill="#D85B45"/>
+    <text x="86" y="354" class="section-title" fill="#B74232">生成 Agent 执行面</text>
+    <text x="86" y="376" class="section-sub">白色卡片是真实角色；橙色卡片是系统门禁或确定性程序，不是新 Agent</text>
+    <text x="2100" y="376" text-anchor="end" class="tiny">实线：Main Agent 派发 / 回收</text>
+
+    <path d="M240 400 H1915" class="dispatch-bus"/>
+    <path d="M915 270 V400" class="dispatch-bus"/>
+
+    <path d="M240 400 V417" class="dispatch"/>
+    <path d="M575 400 V417" class="dispatch"/>
+    <path d="M910 400 V417" class="dispatch"/>
+    <path d="M1245 400 V417" class="dispatch"/>
+    <path d="M1580 400 V417" class="dispatch"/>
+    <path d="M1915 400 V417" class="dispatch"/>
+
+    <g id="material-agent">
+      <rect x="90" y="425" width="300" height="170" rx="8" fill="#FFFFFF" stroke="#E99888" class="box"/>
+      <rect x="90" y="425" width="300" height="7" rx="4" fill="#D85B45"/>
+      <text x="110" y="452" class="kicker" fill="#B74232">AGENT · 按需采集图</text>
+      <text x="240" y="482" text-anchor="middle" class="box-title">核心素材 Agent</text>
+      <text x="240" y="508" text-anchor="middle" class="box-sub">搜索 B站 / 抖音候选</text>
+      <text x="240" y="531" text-anchor="middle" class="box-sub">提交候选并等待人工确认</text>
+      <text x="240" y="557" text-anchor="middle" class="tiny">主生成图内的素材前检是程序节点</text>
+      <text x="240" y="579" text-anchor="middle" class="micro">不与 Route Agent 直接互调</text>
+    </g>
+
+    <g id="route-agent">
+      <rect x="425" y="425" width="300" height="170" rx="8" fill="#FFFFFF" stroke="#E99888" class="box"/>
+      <rect x="425" y="425" width="300" height="7" rx="4" fill="#D85B45"/>
+      <text x="445" y="452" class="kicker" fill="#B74232">AGENT · 路线阶段</text>
+      <text x="575" y="482" text-anchor="middle" class="box-title">Route Agent</text>
+      <text x="575" y="508" text-anchor="middle" class="box-sub">生成 / 补齐路线骨架</text>
+      <text x="575" y="531" text-anchor="middle" class="box-sub">结构化 Day、POI、时间与交通</text>
+      <text x="575" y="557" text-anchor="middle" class="tiny">判断 needs_detail；不能自证通过</text>
+      <text x="575" y="579" text-anchor="middle" class="micro">固定路线只补齐与核验，不静默改结构</text>
+    </g>
+
+    <g id="lifestyle-agent">
+      <rect x="760" y="425" width="300" height="170" rx="8" fill="#FFFFFF" stroke="#E99888" class="box"/>
+      <rect x="760" y="425" width="300" height="7" rx="4" fill="#D85B45"/>
+      <text x="780" y="452" class="kicker" fill="#B74232">AGENT · 日级调研</text>
+      <text x="910" y="482" text-anchor="middle" class="box-title">Lifestyle Agent</text>
+      <text x="910" y="508" text-anchor="middle" class="box-sub">food · outfit · lodging · play</text>
+      <text x="910" y="531" text-anchor="middle" class="box-sub">每个 Day 独立上下文 / Checkpoint</text>
+      <text x="910" y="557" text-anchor="middle" class="tiny">当前按日顺序执行，不宣称并行</text>
+      <text x="910" y="579" text-anchor="middle" class="micro">路线已确认，不得改写路线结构</text>
+    </g>
+
+    <g id="pitfall-agent">
+      <rect x="1095" y="425" width="300" height="170" rx="8" fill="#FFFFFF" stroke="#E99888" class="box"/>
+      <rect x="1095" y="425" width="300" height="7" rx="4" fill="#D85B45"/>
+      <text x="1115" y="452" class="kicker" fill="#B74232">AGENT · 定向避雷</text>
+      <text x="1245" y="482" text-anchor="middle" class="box-title">Pitfall Agent</text>
+      <text x="1245" y="508" text-anchor="middle" class="box-sub">针对 Lifestyle 具体推荐检索</text>
+      <text x="1245" y="531" text-anchor="middle" class="box-sub">按 Day 独立上下文，当前顺序</text>
+      <text x="1245" y="557" text-anchor="middle" class="tiny">无可靠负面证据时 warning 可为空</text>
+      <text x="1245" y="579" text-anchor="middle" class="micro">补充预警，不直接替换原推荐</text>
+    </g>
+
+    <g id="integration-agent">
+      <rect x="1430" y="425" width="300" height="170" rx="8" fill="#FFFFFF" stroke="#E99888" class="box"/>
+      <rect x="1430" y="425" width="300" height="7" rx="4" fill="#D85B45"/>
+      <text x="1450" y="452" class="kicker" fill="#B74232">AGENT · 森林整合</text>
+      <text x="1580" y="482" text-anchor="middle" class="box-title">Integration Agent</text>
+      <text x="1580" y="508" text-anchor="middle" class="box-sub">消费可交付 Claim 与路线事实</text>
+      <text x="1580" y="531" text-anchor="middle" class="box-sub">组织森林正文与结构化 Blocks</text>
+      <text x="1580" y="557" text-anchor="middle" class="tiny">唯一可写最终攻略正文的角色</text>
+      <text x="1580" y="579" text-anchor="middle" class="micro">不重新发明上游事实</text>
+    </g>
+
+    <g id="poi-agent">
+      <rect x="1765" y="425" width="300" height="170" rx="8" fill="#FFFFFF" stroke="#9A82DC" class="box"/>
+      <rect x="1765" y="425" width="300" height="7" rx="4" fill="#7657C8"/>
+      <text x="1785" y="452" class="kicker" fill="#6546B8">AGENT · 树木 FAN-OUT</text>
+      <text x="1915" y="482" text-anchor="middle" class="box-title">POI Detail Agent × N</text>
+      <text x="1915" y="508" text-anchor="middle" class="box-sub">同一人设，按 needs_detail 派发</text>
+      <text x="1915" y="531" text-anchor="middle" class="box-sub">每个 POI 独立上下文和 JSON</text>
+      <rect x="1812" y="548" width="60" height="26" rx="5" fill="#F4F0FF" stroke="#C9BDF1"/>
+      <rect x="1885" y="548" width="60" height="26" rx="5" fill="#F4F0FF" stroke="#C9BDF1"/>
+      <rect x="1958" y="548" width="60" height="26" rx="5" fill="#F4F0FF" stroke="#C9BDF1"/>
+      <text x="1842" y="566" text-anchor="middle" class="micro" fill="#6546B8">POI A</text>
+      <text x="1915" y="566" text-anchor="middle" class="micro" fill="#6546B8">POI B</text>
+      <text x="1988" y="566" text-anchor="middle" class="micro" fill="#6546B8">POI N</text>
+      <text x="1915" y="590" text-anchor="middle" class="micro">当前主链唯一明确的 Send 并行</text>
+    </g>
+
+    <g id="program-gates">
+      <rect x="90" y="620" width="300" height="98" rx="8" fill="#FFF8EC" stroke="#E6AE52" class="box"/>
+      <text x="110" y="645" class="kicker" fill="#B45309">PROGRAM · 非 AGENT</text>
+      <text x="240" y="673" text-anchor="middle" class="box-title">候选确认与确定性入库</text>
+      <text x="240" y="698" text-anchor="middle" class="tiny">Raw / Manifest → 相关性 → Chunk / Index</text>
+
+      <rect x="425" y="620" width="300" height="98" rx="8" fill="#FFF8EC" stroke="#E6AE52" class="box"/>
+      <text x="445" y="645" class="kicker" fill="#B45309">GATE · 非 AGENT</text>
+      <text x="575" y="673" text-anchor="middle" class="box-title">Citation → Route Map → Feasibility</text>
+      <text x="575" y="698" text-anchor="middle" class="tiny">依据 · 实体与相邻路段 · 时效与可执行性</text>
+
+      <rect x="760" y="620" width="300" height="98" rx="8" fill="#FFF8EC" stroke="#E6AE52" class="box"/>
+      <text x="780" y="645" class="kicker" fill="#B45309">CHECKER · 非 AGENT</text>
+      <text x="910" y="673" text-anchor="middle" class="box-title">Schema / Claim / Citation</text>
+      <text x="910" y="698" text-anchor="middle" class="tiny">失败按 Day / field / claim 收窄，有限返修</text>
+
+      <rect x="1095" y="620" width="300" height="98" rx="8" fill="#FFF8EC" stroke="#E6AE52" class="box"/>
+      <text x="1115" y="645" class="kicker" fill="#B45309">CHECKER · 非 AGENT</text>
+      <text x="1245" y="673" text-anchor="middle" class="box-title">推荐绑定 / Claim / Citation</text>
+      <text x="1245" y="698" text-anchor="middle" class="tiny">失败只修目标项；不强行凑避雷内容</text>
+
+      <rect x="1430" y="620" width="300" height="98" rx="8" fill="#FFF8EC" stroke="#E6AE52" class="box"/>
+      <text x="1450" y="645" class="kicker" fill="#B45309">CONTRACT · 非 AGENT</text>
+      <text x="1580" y="673" text-anchor="middle" class="box-title">Deliverable Projection</text>
+      <text x="1580" y="698" text-anchor="middle" class="tiny">可交付 Claim 过滤 · 结构化 Blocks · 最终契约</text>
+
+      <rect x="1765" y="620" width="300" height="98" rx="8" fill="#FFF8EC" stroke="#E6AE52" class="box"/>
+      <text x="1785" y="645" class="kicker" fill="#B45309">JOIN · 非 AGENT</text>
+      <text x="1915" y="673" text-anchor="middle" class="box-title">分支核验 → Manifest + Join</text>
+      <text x="1915" y="698" text-anchor="middle" class="tiny">各分支独立降级；程序汇总，不用 LLM 重写</text>
+    </g>
+
+    <rect x="90" y="746" width="1975" height="55" rx="7" fill="#FFF8F6" stroke="#E99888" stroke-dasharray="7 6"/>
+    <text x="1077" y="769" text-anchor="middle" class="box-sub" fill="#B74232">状态机阶段顺序（不表示子 Agent 直接调用）</text>
+    <text x="1077" y="790" text-anchor="middle" class="tiny">Route + 用户确认 → 路线三门 → Lifestyle → Pitfall → Integration → 交付契约 → POI Send × N → Manifest / Join</text>
+  </g>
+
+  <g id="workspace-data-plane">
+    <rect x="60" y="855" width="2080" height="260" rx="8" fill="#EEF5FF" stroke="#B3CFF6" class="panel"/>
+    <rect x="60" y="855" width="8" height="260" fill="#2563EB"/>
+    <text x="86" y="888" class="section-title" fill="#1D4ED8">共享 Workspace · 业务事实数据面</text>
+    <text x="86" y="910" class="section-sub">Agent 只通过绑定工具读写授权区域；程序 Gate 产出核验报告；Workspace 不等于 Checkpoint</text>
+    <text x="2100" y="910" text-anchor="end" class="tiny" fill="#1D4ED8">业务依赖通过文件和状态传递，不通过 Agent 直连</text>
+
+    <path d="M1100 825 V847" class="data-link"/>
+    <text x="1120" y="846" class="micro" fill="#1D4ED8">受限工具读写</text>
+
+    <rect x="90" y="935" width="300" height="145" rx="8" fill="#FFFFFF" stroke="#79ADEF" class="box"/>
+    <text x="240" y="963" text-anchor="middle" class="box-title">素材与证据</text>
+    <text x="240" y="988" text-anchor="middle" class="box-sub">data/material_library/raw + index</text>
+    <text x="240" y="1011" text-anchor="middle" class="box-sub">Project Web Evidence</text>
+    <text x="240" y="1034" text-anchor="middle" class="tiny">原文 / chunk / entity / source</text>
+    <text x="240" y="1058" text-anchor="middle" class="micro">全局 UGC 与 Project 时效证据分层</text>
+
+    <rect x="425" y="935" width="300" height="145" rx="8" fill="#FFFFFF" stroke="#79ADEF" class="box"/>
+    <text x="575" y="963" text-anchor="middle" class="box-title">需求、路线与门禁</text>
+    <text x="575" y="988" text-anchor="middle" class="box-sub">requirements.json / route_plan.json</text>
+    <text x="575" y="1011" text-anchor="middle" class="box-sub">route_map_validation.json</text>
+    <text x="575" y="1034" text-anchor="middle" class="box-sub">route_feasibility.json</text>
+    <text x="575" y="1058" text-anchor="middle" class="micro">路线 Hash 和确认合同约束下游</text>
+
+    <rect x="760" y="935" width="300" height="145" rx="8" fill="#FFFFFF" stroke="#79ADEF" class="box"/>
+    <text x="910" y="963" text-anchor="middle" class="box-title">Lifestyle 产出</text>
+    <text x="910" y="988" text-anchor="middle" class="box-sub">outputs/lifestyle.json</text>
+    <text x="910" y="1011" text-anchor="middle" class="box-sub">claims / sources / claimed_entities</text>
+    <text x="910" y="1034" text-anchor="middle" class="box-sub">evidence_checks / findings</text>
+    <text x="910" y="1058" text-anchor="middle" class="micro">按 Day 合并，保留失败现场</text>
+
+    <rect x="1095" y="935" width="300" height="145" rx="8" fill="#FFFFFF" stroke="#79ADEF" class="box"/>
+    <text x="1245" y="963" text-anchor="middle" class="box-title">Pitfall 产出</text>
+    <text x="1245" y="988" text-anchor="middle" class="box-sub">outputs/pitfall.json</text>
+    <text x="1245" y="1011" text-anchor="middle" class="box-sub">target_recommendation / warning</text>
+    <text x="1245" y="1034" text-anchor="middle" class="box-sub">claims / evidence_checks</text>
+    <text x="1245" y="1058" text-anchor="middle" class="micro">与 Lifestyle 的 Day / field 确定性绑定</text>
+
+    <rect x="1430" y="935" width="300" height="145" rx="8" fill="#FFFFFF" stroke="#79ADEF" class="box"/>
+    <text x="1580" y="963" text-anchor="middle" class="box-title">森林正文与交付契约</text>
+    <text x="1580" y="988" text-anchor="middle" class="box-sub">final_guide.blocks.json</text>
+    <text x="1580" y="1011" text-anchor="middle" class="box-sub">final_guide.md 基础正文</text>
+    <text x="1580" y="1034" text-anchor="middle" class="box-sub">delivery / citation status</text>
+    <text x="1580" y="1058" text-anchor="middle" class="micro">结构化事实是细粒度正本</text>
+
+    <rect x="1765" y="935" width="300" height="145" rx="8" fill="#FFFFFF" stroke="#79ADEF" class="box"/>
+    <text x="1915" y="963" text-anchor="middle" class="box-title">POI 树木与最终 Join</text>
+    <text x="1915" y="988" text-anchor="middle" class="box-sub">outputs/poi_details/*.json</text>
+    <text x="1915" y="1011" text-anchor="middle" class="box-sub">manifest.json / delivery hash</text>
+    <text x="1915" y="1034" text-anchor="middle" class="box-sub">joined final_guide.md</text>
+    <text x="1915" y="1058" text-anchor="middle" class="micro">树木细节被拼入森林报告，不覆盖 Blocks</text>
+  </g>
+
+  <g id="post-completion-roles">
+    <rect x="60" y="1145" width="1355" height="240" rx="8" fill="#ECF8EF" stroke="#AED9BC" class="panel"/>
+    <rect x="60" y="1145" width="8" height="240" fill="#168A52"/>
+    <text x="86" y="1178" class="section-title" fill="#117044">完成后 · 飞书陪伴角色池</text>
+    <text x="86" y="1200" class="section-sub">同一 Supervisor 进入响应模式，按当前问题五选一；陪伴角色不自由互调</text>
+
+    <rect x="90" y="1230" width="215" height="92" rx="8" fill="#FFFFFF" stroke="#4FAE75" class="box"/>
+    <rect x="90" y="1230" width="7" height="92" rx="4" fill="#168A52"/>
+    <text x="197" y="1258" text-anchor="middle" class="kicker" fill="#117044">SUPERVISOR ROUTER</text>
+    <text x="197" y="1283" text-anchor="middle" font-size="15" font-weight="700" fill="#172033">轻量意图五选一</text>
+    <text x="197" y="1305" text-anchor="middle" font-size="11" fill="#667085">飞书自由提问默认自动路由</text>
+
+    <path d="M305 1276 H320 V1218 H1300" class="dispatch-bus"/>
+    <path d="M425 1218 V1222" class="dispatch"/>
+    <path d="M638 1218 V1222" class="dispatch"/>
+    <path d="M851 1218 V1222" class="dispatch"/>
+    <path d="M1064 1218 V1222" class="dispatch"/>
+    <path d="M1277 1218 V1222" class="dispatch"/>
+
+    <rect x="330" y="1230" width="190" height="92" rx="8" fill="#FFFFFF" stroke="#70BD8D" class="box"/>
+    <text x="425" y="1258" text-anchor="middle" class="kicker" fill="#117044">AGENT</text>
+    <text x="425" y="1283" text-anchor="middle" class="box-title">Guide Agent</text>
+    <text x="425" y="1305" text-anchor="middle" class="tiny">只读已有攻略 / POI</text>
+
+    <rect x="543" y="1230" width="190" height="92" rx="8" fill="#FFFFFF" stroke="#70BD8D" class="box"/>
+    <text x="638" y="1258" text-anchor="middle" class="kicker" fill="#117044">AGENT</text>
+    <text x="638" y="1283" text-anchor="middle" class="box-title">Realtime Agent</text>
+    <text x="638" y="1305" text-anchor="middle" class="tiny">时效查询 / 提醒 / Patch 提案</text>
+
+    <rect x="756" y="1230" width="190" height="92" rx="8" fill="#FFFFFF" stroke="#70BD8D" class="box"/>
+    <text x="851" y="1258" text-anchor="middle" class="kicker" fill="#117044">AGENT</text>
+    <text x="851" y="1283" text-anchor="middle" class="box-title">Lifestyle Query</text>
+    <text x="851" y="1305" text-anchor="middle" class="tiny">素材库补充查询</text>
+
+    <rect x="969" y="1230" width="190" height="92" rx="8" fill="#FFFFFF" stroke="#70BD8D" class="box"/>
+    <text x="1064" y="1258" text-anchor="middle" class="kicker" fill="#117044">AGENT</text>
+    <text x="1064" y="1283" text-anchor="middle" class="box-title">Pitfall Query</text>
+    <text x="1064" y="1305" text-anchor="middle" class="tiny">素材库定向避雷</text>
+
+    <rect x="1182" y="1230" width="190" height="92" rx="8" fill="#FFFFFF" stroke="#70BD8D" class="box"/>
+    <text x="1277" y="1258" text-anchor="middle" class="kicker" fill="#117044">AGENT</text>
+    <text x="1277" y="1283" text-anchor="middle" class="box-title">Culture Agent</text>
+    <text x="1277" y="1305" text-anchor="middle" class="tiny">Web 查证后文化科普</text>
+
+    <text x="731" y="1354" text-anchor="middle" class="tiny" fill="#117044">默认只调用一个角色；Guide 回答 covered=false 时，由 Supervisor 再选一个补充角色</text>
+
+    <rect x="1445" y="1145" width="695" height="240" rx="8" fill="#FDF2F8" stroke="#F0B5CF" class="panel"/>
+    <rect x="1445" y="1145" width="8" height="240" fill="#BE185D"/>
+    <text x="1471" y="1178" class="section-title" fill="#9D174D">生成后 · 定向复核旁路</text>
+    <text x="1471" y="1200" class="section-sub">不属于 build_graph() 生成主链</text>
+
+    <rect x="1475" y="1220" width="275" height="112" rx="8" fill="#FFFFFF" stroke="#9A82DC" class="box"/>
+    <rect x="1475" y="1220" width="275" height="7" rx="4" fill="#7657C8"/>
+    <text x="1495" y="1247" class="kicker" fill="#6546B8">AGENT · READ ONLY</text>
+    <text x="1612" y="1276" text-anchor="middle" class="box-title">Targeted Review Agent</text>
+    <text x="1612" y="1300" text-anchor="middle" class="box-sub">调查 Finding 与争议证据</text>
+    <text x="1612" y="1320" text-anchor="middle" class="tiny">只提交 Recommendation</text>
+
+    <rect x="1790" y="1220" width="315" height="112" rx="8" fill="#FFFFFF" stroke="#D786AA" class="box"/>
+    <text x="1947" y="1249" text-anchor="middle" class="box-title">Review Center + HITL</text>
+    <text x="1947" y="1274" text-anchor="middle" class="box-sub">Recommendation → 人工接受</text>
+    <text x="1947" y="1297" text-anchor="middle" class="box-sub">Patch → 项目级批次验收</text>
+    <text x="1947" y="1320" text-anchor="middle" class="tiny">失败回复核队列，不自动无限重试</text>
+    <path d="M1750 1276 H1782" class="feedback"/>
+    <text x="1798" y="1355" class="tiny" fill="#9D174D">Review Agent 不能写攻略、创建 Patch 或自动调用生成 Agent</text>
+  </g>
+
+  <g id="harness-layer">
+    <rect x="60" y="1415" width="2080" height="210" rx="8" fill="#F2F4F7" stroke="#C8CED8" class="panel"/>
+    <rect x="60" y="1415" width="8" height="210" fill="#586579"/>
+    <text x="86" y="1448" class="section-title" fill="#344054">横切 Harness 与对照实验</text>
+    <text x="86" y="1470" class="section-sub">它们约束角色如何长时执行，不增加新的业务 Agent</text>
+
+    <rect x="90" y="1495" width="370" height="100" rx="8" fill="#FFFFFF" stroke="#AEB6C3" class="box"/>
+    <text x="275" y="1523" text-anchor="middle" class="box-title">SQLite Checkpoint</text>
+    <text x="275" y="1548" text-anchor="middle" class="box-sub">Project 根图 + Day / POI 工作单元</text>
+    <text x="275" y="1572" text-anchor="middle" class="tiny">断点续跑 · 跳过已完成节点 · 局部恢复</text>
+
+    <rect x="485" y="1495" width="370" height="100" rx="8" fill="#FFFFFF" stroke="#AEB6C3" class="box"/>
+    <text x="670" y="1523" text-anchor="middle" class="box-title">Context Governance</text>
+    <text x="670" y="1548" text-anchor="middle" class="box-sub">角色输入投影 · 三层 Context Editing</text>
+    <text x="670" y="1572" text-anchor="middle" class="tiny">保护任务、findings、ID/URL锚点与最新失败底稿</text>
+
+    <rect x="880" y="1495" width="370" height="100" rx="8" fill="#FFFFFF" stroke="#AEB6C3" class="box"/>
+    <text x="1065" y="1523" text-anchor="middle" class="box-title">Bounded Recovery</text>
+    <text x="1065" y="1548" text-anchor="middle" class="box-sub">有限重试 · 退避 / Retry-After · Provider 恢复</text>
+    <text x="1065" y="1572" text-anchor="middle" class="tiny">失败分类 · 写入验收 · 显式降级和人工介入</text>
+
+    <rect x="1275" y="1495" width="370" height="100" rx="8" fill="#FFFFFF" stroke="#AEB6C3" class="box"/>
+    <text x="1460" y="1523" text-anchor="middle" class="box-title">权限、契约与可观测性</text>
+    <text x="1460" y="1548" text-anchor="middle" class="box-sub">bind_tools · Schema · Route Hash · Trace</text>
+    <text x="1460" y="1572" text-anchor="middle" class="tiny">Web 日志 · Validation Runs · 有限轮次与失败留痕</text>
+
+    <rect x="1670" y="1495" width="430" height="100" rx="8" fill="#FFFFFF" stroke="#D786AA" class="box"/>
+    <text x="1885" y="1523" text-anchor="middle" class="box-title" fill="#9D174D">Codex Travel Skill · 实验 Harness</text>
+    <text x="1885" y="1548" text-anchor="middle" class="box-sub">Codex 主 Agent 按需使用专职子 Agent</text>
+    <text x="1885" y="1572" text-anchor="middle" class="tiny">便携 Bundle 仅验 route-only；完整攻略依赖仓库 Runtime</text>
+  </g>
+
+  <g id="legend">
+    <text x="60" y="1662" class="tiny">白色卡片：Agent / 节点　橙色：程序 Gate / Checker　蓝色：Workspace 事实　绿色：HITL / 陪伴　灰色：Harness　玫红虚线：复核与反馈</text>
+    <text x="2140" y="1662" text-anchor="end" class="tiny">× N = 同一 Agent 角色的隔离并行实例</text>
+    <text x="60" y="1685" class="micro">关键边界：Main Agent 控制调度；子 Agent 不直接互调；Lifestyle / Pitfall 按 Day 隔离但当前顺序；POI 才是当前 Send 并行；force_finalized 不等于 passed。</text>
+    <text x="2140" y="1685" text-anchor="end" class="micro">现有系统流程图保留；本图只补充 Agent 组织视角</text>
+  </g>
+</svg>

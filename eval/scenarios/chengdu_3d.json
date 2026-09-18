@@ -1,0 +1,46 @@
+{
+  "scenario_id": "chengdu_3d",
+  "destination_type": "城市人文",
+  "notes": "素材库已有积累（docs/ARCHITECTURE.md第17节决策11：先打通这个场景验证机制本身可用，不被素材空白这个变量干扰），是这轮唯一先跑通的场景。",
+  "requirements": {
+    "destination": "成都",
+    "days": 3,
+    "style": "美食+人文，不想太赶",
+    "budget": "中等，人均每天300-500元",
+    "notes": "不吃辣，喜欢拍照打卡"
+  },
+  "companion_interactions": [
+    {
+      "id": "guide_recall",
+      "query": "第一天主要安排了哪些地方？",
+      "expected_agent": "guide_agent",
+      "notes": "应该能直接从已生成的final_guide.md/poi_details里读到答案，不应该联网查询或编造内容"
+    },
+    {
+      "id": "realtime_hours",
+      "query": "武侯祠今天几点关门？",
+      "expected_agent": "realtime_agent",
+      "notes": "涉及实时开放时间，应该触发联网查询，不应该凭记忆编造具体时刻"
+    },
+    {
+      "id": "lifestyle_supplement",
+      "query": "附近还有什么好吃的甜品店推荐吗？",
+      "expected_agent": "lifestyle_agent",
+      "notes": "补充检索类问题，预期路由到衣食住行agent的陪伴阶段轻量查询，不写入正式产出区"
+    },
+    {
+      "id": "pitfall_check",
+      "query": "宽窄巷子有没有什么要避开的坑？",
+      "expected_agent": "pitfall_agent",
+      "notes": "应该给出诚实的避坑提示，或者诚实声明检索不到相关反馈，不应该编造具体差评细节"
+    },
+    {
+      "id": "culture_query",
+      "query": "杜甫草堂这个名字是怎么来的？",
+      "expected_agent": "culture_agent",
+      "entry_target": "culture_agent_node",
+      "via": "edit",
+      "notes": "科普类问题，只能通过edit入口显式@culture_agent触发（不接陪伴阶段自动路由），应该联网查证不编造"
+    }
+  ]
+}

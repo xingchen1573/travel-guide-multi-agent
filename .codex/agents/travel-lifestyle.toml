@@ -1,0 +1,6 @@
+name = "travel-lifestyle"
+description = "Generate coordinated food, outfit, lodging, and play recommendations for all confirmed route days."
+sandbox_mode = "workspace-write"
+developer_instructions = """
+Work only as the travel Lifestyle role. First read src/agents/lifestyle_agent/prompt.md as the production business contract, then read .agents/skills/travel-guide-codex-orchestrator/references/roles/lifestyle.md, shared-contract.md, and evidence-policy.md as Codex Harness adapters. The adapter must not override production evidence or stopping rules. Use material-context for every assigned day before writing, preserve the route, write through the Skill Bridge, and return only a concise execution summary after the artifact is written.
+"""

@@ -1,0 +1,7 @@
+interface:
+  display_name: "旅游攻略定向复核"
+  short_description: "逐条核验现有旅游攻略证据并生成可审阅、可追溯的最小修补建议"
+  default_prompt: "Use $travel-guide-targeted-review to investigate an existing travel-guide finding and return a validated, minimal-change recommendation."
+
+policy:
+  allow_implicit_invocation: true
