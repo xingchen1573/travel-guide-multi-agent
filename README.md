@@ -10,7 +10,13 @@
 
 [架构与机制](#架构与机制) · [三层优化](#三层优化与双-harness-反哺) · [实验依据](#实验依据) · [快速开始](#快速开始)
 
-![青甘大环线 8 日攻略网站总览](docs/assets/readme/qinggan-overview.jpg)
+<p align="center">
+  <a href="docs/assets/readme/qinggan-overview.png">
+    <img src="docs/assets/readme/qinggan-overview.png" alt="青甘大环线 8 日攻略网站总览">
+  </a>
+</p>
+
+<p align="center"><sub>真实交付网站首屏，点击图片查看高清原图</sub></p>
 
 这些示例来自早期青甘 8 日 Project，用于展示真实交付形态，不作为所有质量门禁均通过的证明。
 
@@ -38,7 +44,13 @@ LangGraph 主链：`Route → 确认 → 路线门禁 → Lifestyle → Pitfall 
 
 ## 真实产物
 
-![青甘大环线 Day 1 AI 攻略海报](docs/assets/readme/qinggan-day1-poster.webp)
+<p align="center">
+  <a href="docs/assets/readme/qinggan-day1-poster.png">
+    <img src="docs/assets/readme/qinggan-day1-poster.png" alt="青甘大环线 Day 1 AI 攻略海报" width="680">
+  </a>
+</p>
+
+<p align="center"><sub>逐日攻略海报，点击图片查看高清原图</sub></p>
 
 同一份结构化 Workspace 还能投影为逐日网站和 POI 内部游览页面：[POI 概览](docs/assets/readme/qinggan-qinghai-poi-overview.png) · [POI 路线详情](docs/assets/readme/qinggan-qinghai-poi-route.png)。
 
