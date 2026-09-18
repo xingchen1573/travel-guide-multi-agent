@@ -26,11 +26,11 @@ LangGraph 承载完整应用主链；Codex 旅游编排 Skill 复用相同业务
 
 LangGraph 主链：`Route → 确认 → 路线门禁 → Lifestyle → Pitfall → Integration → POI fan-out → Manifest / Join`。Lifestyle 按 Day 创建隔离的串行工作单元；Pitfall 在其后针对整份多日推荐统一检查；彼此独立的 POI 分支动态并行。
 
-- **工具分工：**FAISS + BM25 + 加权 RRF 检索本地 UGC 体验素材，Web 核验动态信息，高德提供实体与路段证据。
-- **路线契约：**以快照和 Hash 固定路线，先检查引用、地图与可执行性；普通事实修复保持路线结构，结构变更须重新确认。
-- **长任务恢复：**角色输入投影与三层 Context Editing 控制上下文，SQLite Checkpoint 恢复执行；工具写入校验、有限重试与显式降级约束失败处理。Workspace 保存业务事实。
-- **交付隔离：**Claim 绑定来源与核验状态，角色权限和 Schema 约束写入；Integration 只消费可交付 Claim，拒绝引用错位与过期版本。
-- **POI 分支：**按 `needs_detail` 并行生成景点内部路线，分支独立核验与恢复，由 Manifest / Join 汇合；返修限定到失败单元。
+- **工具分工：** FAISS + BM25 + 加权 RRF 检索本地 UGC 体验素材，Web 核验动态信息，高德提供实体与路段证据。
+- **路线契约：** 以快照和 Hash 固定路线，先检查引用、地图与可执行性；普通事实修复保持路线结构，结构变更须重新确认。
+- **长任务恢复：** 角色输入投影与三层 Context Editing 控制上下文，SQLite Checkpoint 恢复执行；工具写入校验、有限重试与显式降级约束失败处理。Workspace 保存业务事实。
+- **交付隔离：** Claim 绑定来源与核验状态，角色权限和 Schema 约束写入；Integration 只消费可交付 Claim，拒绝引用错位与过期版本。
+- **POI 分支：** 按 `needs_detail` 并行生成景点内部路线，分支独立核验与恢复，由 Manifest / Join 汇合；返修限定到失败单元。
 
 ![旅游攻略多 Agent 编排与共享 Workspace 架构](docs/assets/readme/travel-multi-agent-orchestration-architecture.svg)
 
